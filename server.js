@@ -64,7 +64,7 @@ app.get('/', (req, res) => {
     res.render('signup');
   })
 
-  app.get('/dashboard', (req, res) => {
+  app.get('/dashboard', async (req, res) => {
     
     if (!req.session.user) {
       res.redirect('/login');
@@ -74,13 +74,20 @@ app.get('/', (req, res) => {
   // })
     
   
-    models.Lead.findAll({
+    const leads = await models.Lead.findAll({
       where: {
         user_id: req.session.user.id
       }
-    }).then(leads => {
-      res.render('dashboard', { locals: { username: req.session.user.username, leads : leads } });
-    })
+    }) 
+    console.log(leads)
+    
+      res.render('dashboard', { 
+       locals: { 
+         username: req.session.user.username, 
+         leads : leads 
+        } 
+      })
+  
   })
   
 
@@ -97,6 +104,7 @@ app.get('/api/users/', (req, res, next) => {
 })
 
 //lead  input form api 
+
 app.post('/api/lead/input', (req, res) =>  {
   
   models.Lead.create({
@@ -109,6 +117,17 @@ app.post('/api/lead/input', (req, res) =>  {
     res.json(lead)
   })
 })
+
+// get lead from db and show lead on dashboard 
+app.get('/api/lead', (req, res) => {
+  models.Lead.findAll({
+    where: { user_id : req.session.user.id }
+
+  }).then((leads) => {
+    res.json(leads)
+  })
+})
+   
   
  
   app.post('/api/signup', (req, res) => {

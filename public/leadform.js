@@ -7,11 +7,13 @@ form.addEventListener('submit', (e) => {
   console.log(e.target);
   let firstName = e.target.firstName.value;
   let phoneNumber = e.target.phoneNumber.value;
+  let lastName = e.target.lastName.value;
     let email = e.target.email.value;
   
 
   let body = {
     firstName: firstName,
+    lastName: lastName,
     phoneNumber: phoneNumber,
     email: email
   }
