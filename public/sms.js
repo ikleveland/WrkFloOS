@@ -1,21 +1,17 @@
-console.log('hello world')
 
-let form = document.getElementById('signup-form');
+let form = document.getElementById('sms-form');
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   console.log(e.target);
-  let username = e.target.username.value;
-  let password = e.target.password.value;
-  let email = e.target.email.value;
+  let sms = e.target.sms.value;
 
   let body = {
-    username: username,
-    password: password,
-    email: email
+      lead_id: 1,
+        sms: sms,
   }
 
-  fetch('/api/signup', {
+  fetch('/api/sendsms', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -31,6 +27,6 @@ form.addEventListener('submit', (e) => {
       document.getElementById('errors').innerHTML = errors
 
     }
-    location.href = "/dashboard";
   })
 })
+

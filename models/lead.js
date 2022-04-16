@@ -17,7 +17,6 @@ module.exports = (sequelize, DataTypes) => {
       this.leadsms = Lead.hasMany(models.Leadsms, {
         foreignKey: 'lead_id'
       })
-  
     }
   }
   Lead.init({
@@ -25,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
     phoneNumber: DataTypes.STRING,
-    userId: DataTypes.INTEGER
+    user_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Lead',

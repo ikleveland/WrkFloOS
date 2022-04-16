@@ -10,23 +10,60 @@
   <title>Document</title>
 </head>
 
-<body>
+<body class ="bg-light">
+  <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <header class="mb-auto">
+      <div>
+        <h3 class="float-md-start mb-0">WrkFloOS</h3>
+        <nav class="nav nav-masthead justify-content-center float-md-end">
+          <a class="nav-link active" aria-current="page" href="/">Home</a>
+          <a class="nav-link" href="/logout">Logout</a>
+        </nav>
+      </div>
+    </header>
+    </div>
+
+
   <div class="container">
     <div class="row">
       <h1> Welcome ${username}!</h1>
     </div>
-    <div class="row">
-      <div class="col-12">
-        <h2> here are your leads </h2>
-      </div>
-      <div class="col-12">
-        here are books
+  
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Lead List</h5>
+        <p class="card-text">Start texting your potential customers!</p>
+        <a href="/leadform" class="btn btn-primary">Add another lead</a>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Ryan Mitchell</li>
+          <li class="list-group-item">Djyala Smith</li>
+          <li class="list-group-item">Jteve Sobs</li>
+          <li class="list-group-item">Mario Gustapo</li>
+          <li class="list-group-item">Chin Lane</li>
+          <li class="list-group-item">Tommy Miltiger</li>
+        </ul>
+        
       </div>
     </div>
   </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Text lead</h5>
+        <form id="sms-form">
+          <div class="mb-3">
+            <label for="exampleInputSms" class="sms-form">body</label>
+            <input type="text" class="form-control" id="exampleInputBody" name="sms">
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/sms.js"></script>
 </body>
-
-  
-</body>
-
 </html>

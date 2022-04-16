@@ -10,41 +10,39 @@
   <title>Document</title>
 </head>
 
-<body class = "text-white bg-dark" > 
+<body class="text-white bg-dark">
   <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
     <header class="mb-auto">
       <div>
         <h3 class="float-md-start mb-0">WrkFloOS</h3>
         <nav class="nav nav-masthead justify-content-center float-md-end">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
-          <a class="nav-link" href="/login">Login</a>
-          <a class="nav-link" href="/signup">Sign-Up</a>
+          <a class="nav-link active" aria-current="page" href="/dashboard">Go Back</a>
+         
         </nav>
       </div>
     </header>
     </div>
 
-
   <div class="container">
     <div class="row">
       <div class="col">
-        <h1>Sign up:</h1>
+        <h1>Contact Details</h1>
       </div>
     </div>
     <div class="row">
       <div class="col-6">
-        <form id="signup-form">
+        <form id="lead-form">
           <div class="mb-3 mt-3">
-            <label for="exampleInputUsername1" class="form-label">Username</label>
-            <input type="username" class="form-control" id="exampleInputUsername1" name="username">
-          </div>
-          <div class="mb-3 mt-3">
-            <label for="exampleInputEmail1" class="form-label">Email</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" name="email">
+            <label for="exampleInputUsername1" class="form-label">first Name</label>
+            <input type="username" class="form-control" id="exampleInputfirstName" name="firstName">
           </div>
           <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" name="password">
+            <label for="exampleInputPassword1" class="form-label">Phone Number</label>
+            <input type="text" class="form-control" id="exampleInputphoneNumber" name="phoneNumber">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail" class="form-label">Email</label>
+            <input type="text" class="form-control" id="exampleInputemail" name="email">
           </div>
           <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -52,13 +50,11 @@
           </div>
           <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-        <div id="errors"></div>
       </div>
     </div>
-
   </div>
 
-  <script src="/signup.js"></script>
+  <script src="/leadform.js"></script>
 
 </body>
 

@@ -5,6 +5,15 @@ const bcrypt = require('bcrypt');
 const es6Rendered = require('express-es6-template-engine');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const http = require('http');
+require('dotenv').config();
+
+const accountSid= process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+
+const client = require('twilio')(accountSid, authToken);
+
+
 
 const app = express();
 
@@ -26,12 +35,29 @@ app.use(session({
   }
 }))
 
+app.post('/sms', (req, res) => {
+  const twiml = new MessagingResponse();
+
+  twiml.message('The Robots are coming! Head for the hills!');
+
+  res.writeHead(200, {'Content-Type': 'text/xml'});
+  res.end(twiml.toString());
+});
+
+http.createServer(app).listen(1337, () => {
+  console.log('Express server listening on port 1337');
+}); 
+
 app.get('/', (req, res) => {
     res.render('home');
   })
 
   app.get('/login', (req, res) => {
     res.render('login');
+  })
+
+  app.get('/leadform', (req, res) => {
+    res.render('leadform');
   })
 
   app.get('/signup', (req, res) => {
@@ -44,27 +70,46 @@ app.get('/', (req, res) => {
       res.redirect('/login');
       return;
     }
-    res.render('dashboard',{ locals: { username: req.session.user.username } });
-    })
-  
-    // let user = req.session.user;
-  
-  //   models.User.findAll({
-  //     where: {
-  //       user_id: user.id
-  //     },
-  //     include: models.Leadsms
-  //   }).then(lead => {
-  //     res.render('dashboard', { locals: { username: user.username, lead : lead } });
-  //   })
+  //   res.render('dashboard', { locals: { username: req.session.user.username } });
   // })
+    
+  
+    models.Lead.findAll({
+      where: {
+        user_id: req.session.user.id
+      }
+    }).then(leads => {
+      res.render('dashboard', { locals: { username: req.session.user.username, leads : leads } });
+    })
+  })
+  
 
 app.get('/logout', (req, res) => {
   req.session.destroy();
   res.redirect('/login')
 })
-  
 
+app.get('/api/users/', (req, res, next) => {
+  models.User.findAll().then((user) => {
+    res.json(user)
+  })
+
+})
+
+//lead  input form api 
+app.post('/api/lead/input', (req, res) =>  {
+  
+  models.Lead.create({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
+    email: req.body.email,
+    phone: req.body.phone,
+    user_id: req.session.user.id
+  }).then((lead) => {
+    res.json(lead)
+  })
+})
+  
  
   app.post('/api/signup', (req, res) => {
     const { username, email, password } = req.body;
@@ -119,8 +164,32 @@ app.get('/logout', (req, res) => {
       })
     })
   })
-  
+//twilio callback models.sms.create
+//app.post()
 
+  app.post('/api/sendsms', (req, res) => {
+  
+ 
+  client.messages.create({
+    body:req.body.sms,
+    from:'+12489889653',
+    to:'+14043878862'
+})
+.then((message) => {
+  models.Leadsms.create({
+    lead_id: req.body.lead_id,
+    sent: req.body.sms,
+
+  }).then(() => { 
+    res.json({
+     success: true
+    })
+  })
+
+  console.log(message)
+})
+.catch((err) => console.log(err));
+  })
 
   app.listen(PORT, () => {
     console.log(`App started in port ${PORT}`)

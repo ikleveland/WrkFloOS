@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@faker-js/faker": "^6.1.2",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.0",
@@ -10,7 +11,8 @@
     "nodemon": "^2.0.15",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.19.0"
+    "sequelize": "^6.19.0",
+    "twilio": "^3.76.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

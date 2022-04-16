@@ -22,7 +22,7 @@ module.exports = (sequelize, DataTypes) => {
     recieved: DataTypes.STRING,
     phoneNumber: DataTypes.STRING,
     localNumber: DataTypes.STRING,
-    leadId: DataTypes.INTEGER,
+    lead_id: DataTypes.INTEGER,
     custom: DataTypes.TEXT
   }, {
     sequelize,

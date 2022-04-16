@@ -20,7 +20,7 @@ module.exports = {
       localNumber: {
         type: Sequelize.STRING
       },
-      leadId: {
+      lead_id: {
         type: Sequelize.INTEGER,
         references: {
           model: 'Leads',
